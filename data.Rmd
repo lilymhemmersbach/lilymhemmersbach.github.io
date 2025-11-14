@@ -1,0 +1,220 @@
+```{r}
+library(tidyverse)
+library(hoopR)
+library(ggrepel)
+```
+
+```{r}
+gamesone <- load_mbb_schedule(seasons = 2025)
+
+gamestwo <- load_mbb_schedule(seasons = 2024)
+
+gamesthree <- load_mbb_schedule(seasons = 2023)
+
+gamesfour <- load_mbb_schedule(seasons = 2022)
+
+gamessix <- load_mbb_schedule(seasons = 2020)
+
+games <- bind_rows(gamesone, gamestwo, gamesthree, gamesfour, gamessix)
+```
+
+```{r}
+bigtenone <- gamesone |>
+filter(home_conference_id == "7") 
+
+bigtentwo <- gamestwo |>
+filter(home_conference_id == "7") 
+
+bigtenthree <- gamesthree |>
+filter(home_conference_id == "7")
+
+bigtenfour <- gamesfour |>
+filter(home_conference_id == "7") 
+
+bigtensix <- gamessix |>
+filter(home_conference_id == "7") 
+
+bigtenwinone <-gamesone |>
+filter(home_conference_id == "7") |>
+  filter(home_winner==TRUE)
+
+bigtenwintwo <- gamestwo |>
+filter(home_conference_id == "7") |>
+  filter(home_winner==TRUE)
+
+bigtenwinthree <- gamesthree |>
+filter(home_conference_id == "7") |>
+  filter(home_winner==TRUE)
+
+bigtenwinfour <- gamesfour |>
+filter(home_conference_id == "7") |>
+  filter(home_winner==TRUE)
+
+bigtenwinsix <- gamessix |>
+filter(home_conference_id == "7") |>
+  filter(home_winner==TRUE)
+
+bigtengame <- bind_rows(bigtenone, bigtentwo, bigtenthree, bigtenfour, bigtensix)
+
+bigtenwingame <- bind_rows(bigtenwinone, bigtenwintwo, bigtenwinthree, bigtenwinfour, bigtenwinsix)
+```
+
+```{r}
+avgwinner <- winnergames |>
+  group_by(home_display_name) |>
+  filter(home_conference_id == "7") |>
+  summarize(avgwinnergone=mean(attendance, na.rm = TRUE))
+```
+
+```{r}
+homewins <- bigtengame |>
+  filter(home_winner==TRUE) |>
+  group_by(home_display_name) |>
+  summarize(home_score = mean(home_score, na.rm = TRUE), avgwinnergone=mean(attendance, na.rm = TRUE))
+```
+
+```{r}
+homewins |>
+  summarize(
+    total_home_score = mean(home_score, na.rm = TRUE),
+    total_avg_attendance_sum = mean(avgwinnergone, na.rm = TRUE)
+  )
+```
+
+
+```{r}
+homewins |>
+  summarize(
+    total_home_score = mean(home_score, na.rm = TRUE),
+    total_avg_attendance_sum = mean(avgwinnergone, na.rm = TRUE)
+  )
+```
+
+
+```{r}
+winnergone <- gamesone |>
+  filter(home_winner==TRUE)
+
+winnergtwo <- gamestwo |>
+  filter(home_winner==TRUE)
+
+winnergthree <- gamesthree |>
+  filter(home_winner==TRUE)
+
+winnergfour <- gamesfour |>
+  filter(home_winner==TRUE)
+
+
+
+winnergsix <- gamessix |>
+  filter(home_winner==TRUE)
+
+winnergames<- bind_rows(winnergone, winnergtwo, winnergthree, winnergfour, winnergsix)
+```
+
+
+```{r}
+ggplot() + 
+  geom_point(data=games, aes(x=attendance, y=home_score)) +
+  geom_point(data=winnergames, aes(x=attendance, y=home_score), color = "red") +
+  scale_size(range = c(2, 5), name="Wins") +
+   annotate("rect", fill = "blue", alpha = 0.1, 
+        xmin = 3626.747, xmax = Inf,
+        ymin = 80.06291	, ymax = Inf) +
+  theme_minimal()+
+  labs(
+    x="Attendance", 
+    y="Home Team Score", 
+    title="Crowd Influence in NCAA", 
+    subtitle="NCAA mens basketball home score and wins in relation to their attendance during the 2024-2025 basketball season.", 
+    caption="Source: Source: Saiem Gilani. hoopR: Retrieved from https://hoopr.sportsdataverse.org | By Lily Hemmersbach"
+    ) +
+  theme_minimal() +
+  theme(
+     plot.title = element_text(size = 18, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_text(size=10), 
+    panel.grid.minor = element_blank(),
+    plot.title.position = "plot"
+  )
+```
+
+```{r}
+ggplot() + 
+  geom_point(data=bigtengame, aes(x=attendance, y=home_score)) +
+  geom_point(data=bigtenwingame, aes(x=attendance, y=home_score), color = "red") +
+  scale_size(range = c(2, 5), name="Wins") +
+   annotate("rect", fill = "blue", alpha = 0.1, 
+        xmin = 9902.70, xmax = Inf,
+        ymin = 80.12863, ymax = Inf) +
+  theme_minimal() +
+  labs(
+    x="Attendance", 
+    y="Home Team Score", 
+    title="Higher Attendance, Higher Performance in BIG Ten?", 
+    subtitle="2020-2025 season break analysis of attendance levels relate to home scoring and wins across BIG Ten mens basketball. ", 
+    caption="Source: Saiem Gilani. hoopR: Retrieved from https://hoopr.sportsdataverse.org | By Lily Hemmmersbach"
+    ) +
+  theme_minimal() +
+  theme(
+     plot.title = element_text(size = 18, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_text(size=10), 
+    panel.grid.minor = element_blank(),
+    plot.title.position = "plot"
+  )
+```
+
+
+
+```{r}
+ggplot() + geom_point(data=bigtengame, aes(x=attendance, y=home_score, size = home_score), color="light grey",
+alpha = .3) + 
+  geom_point(data=bigtenwingame, aes(x=attendance, y=home_score, size = home_score), color="red",
+alpha = .3) + 
+  scale_size(range = c(2, 5), name="Wins") +
+   annotate("rect", fill = "blue", alpha = 0.1, 
+        xmin = 9902.70, xmax = Inf,
+        ymin = 80.12863, ymax = Inf) +
+theme_minimal() +
+  labs(
+    x="Attendance", 
+    y="Home Team Score", 
+    title="Do bigger crowds mean more wins in the BIG Ten?", 
+    subtitle="2020-2025 analysis of attendance levels, home scoring and wins across the BIG Ten Conference.", 
+    caption="Source: Data Provider | By Your Name"
+    ) +
+  theme(
+     plot.title = element_text(size = 18, face = "bold"),
+    axis.title = element_text(size = 8), 
+    plot.subtitle = element_text(size=10), 
+    panel.grid.minor = element_blank(),
+    plot.title.position = "plot"
+  )
+```
+
+```{r}
+homewins|>
+  group_by(home_display_name) |>
+  summarize(
+    Wins = sum(home_score, na.rm = TRUE),
+    Avg_Attendance = mean(avgwinnergone, na.rm = TRUE)
+  ) |>
+  arrange(desc(Wins), desc(Avg_Attendance)) |>
+  top_n(10, wt= Wins) 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
