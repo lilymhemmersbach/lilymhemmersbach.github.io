@@ -754,6 +754,201 @@ font-style: inherit;">"plot"</span></span>
 </div>
 </div>
 </div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data=</span>bigtengame, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x=</span>attendance, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y=</span>home_score, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> home_score), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"light grey"</span>,</span>
+<span id="cb4-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb4-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data=</span>bigtenwingame, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x=</span>attendance, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y=</span>home_score, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> home_score), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red"</span>,</span>
+<span id="cb4-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb4-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_size</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">range =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Wins"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-6">   <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rect"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"blue"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>, </span>
+<span id="cb4-7">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xmin =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9902.70</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xmax =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">Inf</span>,</span>
+<span id="cb4-8">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymin =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">80.12863</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymax =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">Inf</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb4-11">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Attendance"</span>, </span>
+<span id="cb4-12">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Home Team Score"</span>, </span>
+<span id="cb4-13">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Do bigger crowds mean more wins in the BIG Ten?"</span>, </span>
+<span id="cb4-14">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2020-2025 analysis of attendance levels, home scoring and wins across the BIG Ten Conference."</span>, </span>
+<span id="cb4-15">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">caption=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Source: Saiem Gilani. hoopR: Retrieved from https://hoopr.sportsdataverse.org | By Lily Hemmmersbach"</span></span>
+<span id="cb4-16">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb4-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(</span>
+<span id="cb4-18">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">face =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bold"</span>),</span>
+<span id="cb4-19">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.title =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>), </span>
+<span id="cb4-20">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.subtitle =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>), </span>
+<span id="cb4-21">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">panel.grid.minor =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb4-22">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.title.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"plot"</span></span>
+<span id="cb4-23">  )</span></code></pre></div></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://your-website-url.example.com/posts/attendance-correlation-to-win-percentage/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 
