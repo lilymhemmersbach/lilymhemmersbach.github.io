@@ -182,7 +182,7 @@ theme_minimal() +
     y="Home Team Score", 
     title="Do bigger crowds mean more wins in the BIG Ten?", 
     subtitle="2020-2025 analysis of attendance levels, home scoring and wins across the BIG Ten Conference.", 
-    caption="Source: Data Provider | By Your Name"
+    caption="Source: Saiem Gilani. hoopR: Retrieved from https://hoopr.sportsdataverse.org | By Lily Hemmmersbach"
     ) +
   theme(
      plot.title = element_text(size = 18, face = "bold"),
