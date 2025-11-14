@@ -21,6 +21,7 @@
 
 
 
+<p>This is where my text is going to go to explain my project.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -388,6 +389,7 @@ background-color: null;
 font-style: inherit;">bind_rows</span>(winnergone, winnergtwo, winnergthree, winnergfour, winnergsix)</span></code></pre></div></div>
 </details>
 </div>
+<p>This is my first graph text explaining.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -571,6 +573,7 @@ font-style: inherit;">"plot"</span></span>
 </div>
 </div>
 </div>
+<p>This is text for second graph.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -754,6 +757,7 @@ font-style: inherit;">"plot"</span></span>
 </div>
 </div>
 </div>
+<p>This is graph three info.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -949,6 +953,7 @@ font-style: inherit;">"plot"</span></span>
 </div>
 </div>
 </div>
+<p>This is final graph info.</p>
 
 
 
