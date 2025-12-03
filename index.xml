@@ -315,19 +315,19 @@ background-color: null;
 font-style: inherit;">labs</span>(</span>
 <span id="cb2-16">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">x=</span><span class="st" style="color: #20794D;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Average Offensive Percentage"</span>, </span>
+font-style: inherit;">" "</span>,</span>
 <span id="cb2-17">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">y=</span><span class="st" style="color: #20794D;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Average Defensive Percentage"</span>, </span>
+font-style: inherit;">" "</span>,</span>
 <span id="cb2-18">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">title=</span><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Border Battle in the NBA"</span>, </span>
+font-style: inherit;">"Border Battle in the NBA, WI on Top"</span>, </span>
 <span id="cb2-19">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">subtitle=</span><span class="st" style="color: #20794D;
@@ -379,7 +379,7 @@ font-style: inherit;">element_text</span>(<span class="at" style="color: #657422
 background-color: null;
 font-style: inherit;">size=</span><span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">9</span>), </span>
+font-style: inherit;">8</span>), </span>
 <span id="cb2-27">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">panel.grid.minor =</span> <span class="fu" style="color: #4758AB;
@@ -464,12 +464,12 @@ font-style: inherit;">labs</span>(</span>
 background-color: null;
 font-style: inherit;">x=</span><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Super Bowl Wins"</span>, </span>
+font-style: inherit;">""</span>, </span>
 <span id="cb3-8">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">y=</span><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Team"</span>, </span>
+font-style: inherit;">"Super Bowl Wins"</span>, </span>
 <span id="cb3-9">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">title=</span><span class="st" style="color: #20794D;
@@ -800,23 +800,23 @@ font-style: inherit;">"Minnesota"</span></span>
 <span id="cb4-45">  )</span></code></pre></div></div>
 </details>
 <div class="cell-output-display">
-<div id="wykjzxwimd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wykjzxwimd table {
+<div id="ortwzyvkgh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ortwzyvkgh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wykjzxwimd thead, #wykjzxwimd tbody, #wykjzxwimd tfoot, #wykjzxwimd tr, #wykjzxwimd td, #wykjzxwimd th {
+#ortwzyvkgh thead, #ortwzyvkgh tbody, #ortwzyvkgh tfoot, #ortwzyvkgh tr, #ortwzyvkgh td, #ortwzyvkgh th {
   border-style: none;
 }
 
-#wykjzxwimd p {
+#ortwzyvkgh p {
   margin: 0;
   padding: 0;
 }
 
-#wykjzxwimd .gt_table {
+#ortwzyvkgh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -842,12 +842,12 @@ font-style: inherit;">"Minnesota"</span></span>
   border-left-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_caption {
+#ortwzyvkgh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wykjzxwimd .gt_title {
+#ortwzyvkgh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -859,7 +859,7 @@ font-style: inherit;">"Minnesota"</span></span>
   border-bottom-width: 0;
 }
 
-#wykjzxwimd .gt_subtitle {
+#ortwzyvkgh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -871,7 +871,7 @@ font-style: inherit;">"Minnesota"</span></span>
   border-top-width: 0;
 }
 
-#wykjzxwimd .gt_heading {
+#ortwzyvkgh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -883,13 +883,13 @@ font-style: inherit;">"Minnesota"</span></span>
   border-right-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_bottom_border {
+#ortwzyvkgh .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_col_headings {
+#ortwzyvkgh .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -904,7 +904,7 @@ font-style: inherit;">"Minnesota"</span></span>
   border-right-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_col_heading {
+#ortwzyvkgh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -924,7 +924,7 @@ font-style: inherit;">"Minnesota"</span></span>
   overflow-x: hidden;
 }
 
-#wykjzxwimd .gt_column_spanner_outer {
+#ortwzyvkgh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -936,15 +936,15 @@ font-style: inherit;">"Minnesota"</span></span>
   padding-right: 4px;
 }
 
-#wykjzxwimd .gt_column_spanner_outer:first-child {
+#ortwzyvkgh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wykjzxwimd .gt_column_spanner_outer:last-child {
+#ortwzyvkgh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wykjzxwimd .gt_column_spanner {
+#ortwzyvkgh .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -956,11 +956,11 @@ font-style: inherit;">"Minnesota"</span></span>
   width: 100%;
 }
 
-#wykjzxwimd .gt_spanner_row {
+#ortwzyvkgh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wykjzxwimd .gt_group_heading {
+#ortwzyvkgh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -986,7 +986,7 @@ font-style: inherit;">"Minnesota"</span></span>
   text-align: left;
 }
 
-#wykjzxwimd .gt_empty_group_heading {
+#ortwzyvkgh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1001,15 +1001,15 @@ font-style: inherit;">"Minnesota"</span></span>
   vertical-align: middle;
 }
 
-#wykjzxwimd .gt_from_md > :first-child {
+#ortwzyvkgh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wykjzxwimd .gt_from_md > :last-child {
+#ortwzyvkgh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wykjzxwimd .gt_row {
+#ortwzyvkgh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1028,7 +1028,7 @@ font-style: inherit;">"Minnesota"</span></span>
   overflow-x: hidden;
 }
 
-#wykjzxwimd .gt_stub {
+#ortwzyvkgh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1041,7 +1041,7 @@ font-style: inherit;">"Minnesota"</span></span>
   padding-right: 5px;
 }
 
-#wykjzxwimd .gt_stub_row_group {
+#ortwzyvkgh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1055,15 +1055,15 @@ font-style: inherit;">"Minnesota"</span></span>
   vertical-align: top;
 }
 
-#wykjzxwimd .gt_row_group_first td {
+#ortwzyvkgh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wykjzxwimd .gt_row_group_first th {
+#ortwzyvkgh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wykjzxwimd .gt_summary_row {
+#ortwzyvkgh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1073,16 +1073,16 @@ font-style: inherit;">"Minnesota"</span></span>
   padding-right: 5px;
 }
 
-#wykjzxwimd .gt_first_summary_row {
+#ortwzyvkgh .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_first_summary_row.thick {
+#ortwzyvkgh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wykjzxwimd .gt_last_summary_row {
+#ortwzyvkgh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1092,7 +1092,7 @@ font-style: inherit;">"Minnesota"</span></span>
   border-bottom-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_grand_summary_row {
+#ortwzyvkgh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1102,7 +1102,7 @@ font-style: inherit;">"Minnesota"</span></span>
   padding-right: 5px;
 }
 
-#wykjzxwimd .gt_first_grand_summary_row {
+#ortwzyvkgh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1112,7 +1112,7 @@ font-style: inherit;">"Minnesota"</span></span>
   border-top-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_last_grand_summary_row_top {
+#ortwzyvkgh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1122,11 +1122,11 @@ font-style: inherit;">"Minnesota"</span></span>
   border-bottom-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_striped {
+#ortwzyvkgh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wykjzxwimd .gt_table_body {
+#ortwzyvkgh .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1135,7 +1135,7 @@ font-style: inherit;">"Minnesota"</span></span>
   border-bottom-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_footnotes {
+#ortwzyvkgh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1149,7 +1149,7 @@ font-style: inherit;">"Minnesota"</span></span>
   border-right-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_footnote {
+#ortwzyvkgh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1158,7 +1158,7 @@ font-style: inherit;">"Minnesota"</span></span>
   padding-right: 5px;
 }
 
-#wykjzxwimd .gt_sourcenotes {
+#ortwzyvkgh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1172,7 +1172,7 @@ font-style: inherit;">"Minnesota"</span></span>
   border-right-color: #D3D3D3;
 }
 
-#wykjzxwimd .gt_sourcenote {
+#ortwzyvkgh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1180,72 +1180,72 @@ font-style: inherit;">"Minnesota"</span></span>
   padding-right: 5px;
 }
 
-#wykjzxwimd .gt_left {
+#ortwzyvkgh .gt_left {
   text-align: left;
 }
 
-#wykjzxwimd .gt_center {
+#ortwzyvkgh .gt_center {
   text-align: center;
 }
 
-#wykjzxwimd .gt_right {
+#ortwzyvkgh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wykjzxwimd .gt_font_normal {
+#ortwzyvkgh .gt_font_normal {
   font-weight: normal;
 }
 
-#wykjzxwimd .gt_font_bold {
+#ortwzyvkgh .gt_font_bold {
   font-weight: bold;
 }
 
-#wykjzxwimd .gt_font_italic {
+#ortwzyvkgh .gt_font_italic {
   font-style: italic;
 }
 
-#wykjzxwimd .gt_super {
+#ortwzyvkgh .gt_super {
   font-size: 65%;
 }
 
-#wykjzxwimd .gt_footnote_marks {
+#ortwzyvkgh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wykjzxwimd .gt_asterisk {
+#ortwzyvkgh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wykjzxwimd .gt_indent_1 {
+#ortwzyvkgh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wykjzxwimd .gt_indent_2 {
+#ortwzyvkgh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wykjzxwimd .gt_indent_3 {
+#ortwzyvkgh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wykjzxwimd .gt_indent_4 {
+#ortwzyvkgh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wykjzxwimd .gt_indent_5 {
+#ortwzyvkgh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wykjzxwimd .katex-display {
+#ortwzyvkgh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wykjzxwimd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ortwzyvkgh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1402,7 +1402,7 @@ font-style: inherit;">"Minnesota"</span></span>
  ]]></description>
   <guid>https://your-website-url.example.com/posts/wi-mn-rival/</guid>
   <pubDate>Fri, 05 Dec 2025 06:00:00 GMT</pubDate>
-  <media:content url="https://your-website-url.example.com/posts/wi-mn-rival/image.png" medium="image" type="image/png"/>
+  <media:content url="https://your-website-url.example.com/posts/wi-mn-rival/image.png" medium="image" type="image/png" height="101" width="144"/>
 </item>
 </channel>
 </rss>
