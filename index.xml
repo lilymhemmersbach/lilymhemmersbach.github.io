@@ -12,16 +12,16 @@
 <generator>quarto-1.8.25</generator>
 <lastBuildDate>Mon, 17 Nov 2025 06:00:00 GMT</lastBuildDate>
 <item>
-  <title>Do Crowds Really Change the Outcome of the Game?</title>
+  <title>Wisconsin Really is Better Than Minnesota</title>
   <dc:creator>Lily Hemmersbach</dc:creator>
-  <link>https://your-website-url.example.com/posts/attendance-correlation-to-win-percentage/</link>
+  <link>https://your-website-url.example.com/posts/wi-mn-rival/</link>
   <description><![CDATA[ 
 
 
 
 
 
-<p>The question on my mind, do the size of crowds have an impact on team’s ability to win? Over the 2020–2025 seasons, we analyzed men’s basketball across the NCAA and more specifically the BIG Ten to explore how home attendance relates to scoring and wins. Using scatterplots of attendance versus home scores, we highlighted wins in red and losses in grey. The data shows a clear pattern. Teams that draw larger crowds often score higher at home and win more games. The shaded regions on the graphs emphasize teams performing above the average, reinforcing the idea that crowd support can boost performance.</p>
+<p>The border battle is basically a personality trait at this point for Wisconsin and Minnesota. If there is one thing mid-westerners love more than cheese curds and football is this rivalry. Wisconsin has cheese curds, tailgating, and beer. What does Minnesota even have?</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -36,363 +36,219 @@ background-color: null;
 font-style: inherit;">library</span>(ggrepel)</span>
 <span id="cb1-4"><span class="fu" style="color: #4758AB;
 background-color: null;
+font-style: inherit;">library</span>(ggalt)</span>
+<span id="cb1-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggtext)</span>
+<span id="cb1-6"><span class="fu" style="color: #4758AB;
+background-color: null;
 font-style: inherit;">library</span>(gt)</span>
-<span id="cb1-5"></span>
-<span id="cb1-6">gamesone <span class="ot" style="color: #003B4F;
+<span id="cb1-7"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+font-style: inherit;">library</span>(rvest)</span>
+<span id="cb1-8"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">load_mbb_schedule</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">seasons =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2025</span>)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8">gamestwo <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">load_mbb_schedule</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">seasons =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2024</span>)</span>
+font-style: inherit;">library</span>(hoopR)</span>
 <span id="cb1-9"></span>
-<span id="cb1-10">gamesthree <span class="ot" style="color: #003B4F;
+<span id="cb1-10">mlb <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">load_mbb_schedule</span>(<span class="at" style="color: #657422;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">seasons =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2023</span>)</span>
-<span id="cb1-11"></span>
-<span id="cb1-12">gamesfour <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">load_mbb_schedule</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">seasons =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2022</span>)</span>
-<span id="cb1-13"></span>
-<span id="cb1-14">gamessix <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">load_mbb_schedule</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">seasons =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2020</span>)</span>
-<span id="cb1-15"></span>
-<span id="cb1-16">games <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">bind_rows</span>(gamesone, gamestwo, gamesthree, gamesfour, gamessix)</span>
-<span id="cb1-17"></span>
-<span id="cb1-18">bigtenone <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamesone <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">"https://docs.google.com/spreadsheets/d/e/2PACX-1vTpoNkooywS_R5VoSyzKXVYiaH8E0L_B6PpdXGL4PMDwlgFyE4HzwXqGZP0jM6s0usLROqJa0JiBoB_/pub?output=csv"</span>)<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb1-19"><span class="fu" style="color: #4758AB;
+<span id="cb1-11">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(home_conference_id <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">group_by</span>(Team) <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-12">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">"7"</span>) </span>
-<span id="cb1-20"></span>
-<span id="cb1-21">bigtentwo <span class="ot" style="color: #003B4F;
+font-style: inherit;">summarize</span>(</span>
+<span id="cb1-13">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">&lt;-</span> gamestwo <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">avg_winper =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(win, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(avg_winper))</span>
+<span id="cb1-15"></span>
+<span id="cb1-16"></span>
+<span id="cb1-17">sb <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://www.pro-football-reference.com/super-bowl/"</span> </span>
+<span id="cb1-18"></span>
+<span id="cb1-19">sbchamp <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> sb <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-20">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_html</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-21">   <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">html_node</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xpath =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'//*[@id="super_bowls"]'</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
 <span id="cb1-22"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(home_conference_id <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">html_table</span>() </span>
+<span id="cb1-23">  </span>
+<span id="cb1-24">appearances <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"7"</span>) </span>
-<span id="cb1-23"></span>
-<span id="cb1-24">bigtenthree <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamesthree <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> sbchamp <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb1-25"><span class="fu" style="color: #4758AB;
+<span id="cb1-25">     <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(home_conference_id <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">pivot_longer</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+font-style: inherit;">cols =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">"7"</span>)</span>
-<span id="cb1-26"></span>
-<span id="cb1-27">bigtenfour <span class="ot" style="color: #003B4F;
+font-style: inherit;">c</span>(Winner, Loser), <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">&lt;-</span> gamesfour <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-28"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_conference_id <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"7"</span>) </span>
-<span id="cb1-29"></span>
-<span id="cb1-30">bigtensix <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamessix <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">"team"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb1-31"><span class="fu" style="color: #4758AB;
+<span id="cb1-26">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(home_conference_id <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">count</span>(team, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"7"</span>) </span>
+font-style: inherit;">"appearances"</span>)</span>
+<span id="cb1-27"></span>
+<span id="cb1-28">winsonly <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> sbchamp <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-29">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(Winner) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-30">   <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>(Winner, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"wins"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-31">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(wins))</span>
 <span id="cb1-32"></span>
-<span id="cb1-33">bigtenwinone <span class="ot" style="color: #003B4F;
+<span id="cb1-33">loseronly <span class="ot" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;-</span>gamesone <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-34"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_conference_id <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"7"</span>) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">&lt;-</span> sbchamp <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb1-35">  <span class="fu" style="color: #4758AB;
+<span id="cb1-34">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-36"></span>
-<span id="cb1-37">bigtenwintwo <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamestwo <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">select</span>(Loser) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb1-38"><span class="fu" style="color: #4758AB;
+<span id="cb1-35">   <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(home_conference_id <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">count</span>(Loser, <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"7"</span>) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">"loser"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-36">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(loser))</span>
+<span id="cb1-37"></span>
+<span id="cb1-38">GB <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> winsonly <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
 <span id="cb1-39">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-40"></span>
-<span id="cb1-41">bigtenwinthree <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamesthree <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-42"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_conference_id <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">filter</span>(Winner <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"7"</span>) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">"Green Bay Packers"</span>)</span>
+<span id="cb1-40"></span>
+<span id="cb1-41"></span>
+<span id="cb1-42">offdef <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2q17BqWtzbtCjTtHVKDXkwN8wkD2iXww5pSWUZVBfgJkB5Oomelb5DeFyq_SzSP6TyTnG9hV41h_S/pub?gid=0&amp;single=true&amp;output=csv"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
 <span id="cb1-43">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-44"></span>
-<span id="cb1-45">bigtenwinfour <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamesfour <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">group_by</span>(Team) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb1-46"><span class="fu" style="color: #4758AB;
+<span id="cb1-44">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(home_conference_id <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">summarize</span>(</span>
+<span id="cb1-45">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+font-style: inherit;">avg_ORtg =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">"7"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-47">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-48"></span>
-<span id="cb1-49">bigtenwinsix <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamessix <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-50"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_conference_id <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"7"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-51">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-52"></span>
-<span id="cb1-53">bigtengame <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">bind_rows</span>(bigtenone, bigtentwo, bigtenthree, bigtenfour, bigtensix)</span>
-<span id="cb1-54"></span>
-<span id="cb1-55">bigtenwingame <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">bind_rows</span>(bigtenwinone, bigtenwintwo, bigtenwinthree, bigtenwinfour, bigtenwinsix)</span>
-<span id="cb1-56"></span>
-<span id="cb1-57">homewins <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> bigtengame <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-58">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-59">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">group_by</span>(home_display_name) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-60">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summarize</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">home_score =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mean</span>(home_score, <span class="at" style="color: #657422;
+font-style: inherit;">mean</span>(ORtg, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">TRUE</span>), <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">avgwinnergone=</span><span class="fu" style="color: #4758AB;
+font-style: inherit;">avg_DRtg =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">mean</span>(attendance, <span class="at" style="color: #657422;
+font-style: inherit;">mean</span>(DRtg, <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
-font-style: inherit;">TRUE</span>))</span>
-<span id="cb1-61"></span>
-<span id="cb1-62">winnergone <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamesone <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb1-46">  ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb1-63">  <span class="fu" style="color: #4758AB;
+<span id="cb1-47">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-64"></span>
-<span id="cb1-65">winnergtwo <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamestwo <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-66">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-67"></span>
-<span id="cb1-68">winnergthree <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamesthree <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-69">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-70"></span>
-<span id="cb1-71">winnergfour <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamesfour <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-72">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-73"></span>
-<span id="cb1-74">winnergsix <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> gamessix <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-75">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(home_winner<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span><span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb1-76"></span>
-<span id="cb1-77">winnergames<span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">bind_rows</span>(winnergone, winnergtwo, winnergthree, winnergfour, winnergsix)</span></code></pre></div></div>
+font-style: inherit;">desc</span>(avg_ORtg))</span></code></pre></div></div>
 </details>
 </div>
-<p>Every dot represents a home game, and every red dot is a win. As attendance climbs, so do home scores, creating a clear zone in the upper right corner where big crowds and big performances collide. This graph isn’t just numbers, it’s proof fan power matters.</p>
+<p>Two key metrics, offensive and defensive rating, provide insight into how efficiently teams score points and how well they prevent opponents from scoring. This chart visualizes the average offensive and defensive percentage over recent seasons. The blue points represent offensive ratings, while the red points represent defensive ratings. Each line connects a team’s offensive and defensive ratings, allowing a quick visual comparison of strengths and weaknesses.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -400,154 +256,100 @@ font-style: inherit;">bind_rows</span>(winnergone, winnergtwo, winnergthree, win
 background-color: null;
 font-style: inherit;">ggplot</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">+</span> </span>
+font-style: inherit;">+</span></span>
 <span id="cb2-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+font-style: inherit;">geom_dumbbell</span>(</span>
+<span id="cb2-3">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">data=</span>games, <span class="fu" style="color: #4758AB;
+font-style: inherit;">data =</span> offdef,</span>
+<span id="cb2-4">    <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+font-style: inherit;">aes</span>(</span>
+<span id="cb2-5">      <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">x=</span>attendance, <span class="at" style="color: #657422;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">y=</span>home_score)) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">reorder</span>(Team, avg_DRtg),</span>
+<span id="cb2-6">      <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb2-3">  <span class="fu" style="color: #4758AB;
+font-style: inherit;">x =</span> avg_ORtg,</span>
+<span id="cb2-7">      <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+font-style: inherit;">xend =</span> avg_DRtg</span>
+<span id="cb2-8">    ), <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">data=</span>winnergames, <span class="fu" style="color: #4758AB;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+font-style: inherit;">2</span>,</span>
+<span id="cb2-9">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">x=</span>attendance, <span class="at" style="color: #657422;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">y=</span>home_score), <span class="at" style="color: #657422;
+font-style: inherit;">"lightgrey"</span>,</span>
+<span id="cb2-10">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+font-style: inherit;">colour_x =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"red"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb2-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_size</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">range =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">name=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Wins"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb2-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_text</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">40000</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">125</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">label=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Average"</span>)<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb2-6">   <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"rect"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"blue"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>, </span>
-<span id="cb2-7">        <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xmin =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3626.747</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xmax =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">Inf</span>,</span>
-<span id="cb2-8">        <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ymin =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">80.06291</span> , <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ymax =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">Inf</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb2-9">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_minimal</span>()<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb2-10">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(</span>
+font-style: inherit;">"blue"</span>,</span>
 <span id="cb2-11">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">x=</span><span class="st" style="color: #20794D;
+font-style: inherit;">colour_xend =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Attendance"</span>, </span>
-<span id="cb2-12">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Home Team Score"</span>, </span>
-<span id="cb2-13">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">title=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Crowd Influence in NCAA"</span>, </span>
-<span id="cb2-14">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">subtitle=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"NCAA mens basketball home score and wins in relation to their attendance during the 2024-2025 basketball season. </span></span>
-<span id="cb2-15"><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">Red = Win, Grey = Loss."</span>, </span>
-<span id="cb2-16">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">caption=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Source: Source: Saiem Gilani. hoopR: Retrieved from https://hoopr.sportsdataverse.org | By Lily Hemmersbach"</span></span>
-<span id="cb2-17">    ) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">"red"</span></span>
+<span id="cb2-12">  ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb2-18">  <span class="fu" style="color: #4758AB;
+<span id="cb2-13"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb2-19">  <span class="fu" style="color: #4758AB;
+<span id="cb2-14">   <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(</span>
+<span id="cb2-16">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Average Offensive Percentage"</span>, </span>
+<span id="cb2-17">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Average Defensive Percentage"</span>, </span>
+<span id="cb2-18">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Border Battle in the NBA"</span>, </span>
+<span id="cb2-19">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"The average offensive and defensive percentages in these teams over the last eight seasons. Blue = Offense, Red = Defense."</span>, </span>
+<span id="cb2-20">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">caption=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Source: Sports Reference | By Lily Hemmmersbach"</span></span>
+<span id="cb2-21">    ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-22">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-23">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">theme</span>(</span>
-<span id="cb2-20">     <span class="at" style="color: #657422;
+<span id="cb2-24">     <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -560,7 +362,7 @@ background-color: null;
 font-style: inherit;">face =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"bold"</span>),</span>
-<span id="cb2-21">    <span class="at" style="color: #657422;
+<span id="cb2-25">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">axis.title =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -569,7 +371,7 @@ background-color: null;
 font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>), </span>
-<span id="cb2-22">    <span class="at" style="color: #657422;
+<span id="cb2-26">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">plot.subtitle =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -578,27 +380,27 @@ background-color: null;
 font-style: inherit;">size=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">9</span>), </span>
-<span id="cb2-23">    <span class="at" style="color: #657422;
+<span id="cb2-27">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">panel.grid.minor =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">element_blank</span>(),</span>
-<span id="cb2-24">    <span class="at" style="color: #657422;
+<span id="cb2-28">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">plot.title.position =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"plot"</span></span>
-<span id="cb2-25">  )</span></code></pre></div></div>
+<span id="cb2-29">  )</span></code></pre></div></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="https://your-website-url.example.com/posts/attendance-correlation-to-win-percentage/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="https://your-website-url.example.com/posts/wi-mn-rival/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Looking at five seasons of data, the trend is hard to ignore. As attendance climbs, so do home scoring averages and the red dots in this chart make it clear that wins stack up in the high attendance zone. Teams playing in front of 10,000+ fans consistently outperform those in quieter arenas. In short, the Big Ten home court advantage is real. The crowd really is influencing the game.</p>
+<p>This chart visualizes total Super Bowl wins across NFL franchises, and the contrast between these two NFC North rivals is striking. The Packers’ bar stands filled in dark green, symbolizing the legacy they’ve built over decades. Meanwhile, the Vikings are absent from this highlighted list of champions. Four appearances, four losses, and decades without a return have left Minnesota watching from the outside as their biggest rival continues to build on a winning tradition.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -609,165 +411,106 @@ background-color: null;
 font-style: inherit;">+</span> </span>
 <span id="cb3-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+font-style: inherit;">geom_bar</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">data=</span>bigtengame, <span class="fu" style="color: #4758AB;
+font-style: inherit;">data=</span>winsonly, <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">x=</span>attendance, <span class="at" style="color: #657422;
+font-style: inherit;">x=</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">y=</span>home_score)) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">reorder</span>(Winner, wins), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">weight=</span>wins), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lightgrey"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb3-3">  <span class="fu" style="color: #4758AB;
+<span id="cb3-3"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+font-style: inherit;">geom_bar</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">data=</span>bigtenwingame, <span class="fu" style="color: #4758AB;
+font-style: inherit;">data=</span>GB, <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">x=</span>attendance, <span class="at" style="color: #657422;
+font-style: inherit;">x=</span><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">y=</span>home_score), <span class="at" style="color: #657422;
+font-style: inherit;">reorder</span>(Winner, wins), <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+font-style: inherit;">weight=</span>wins), <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">"red"</span>) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">fill=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"darkgreen"</span>)<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
 <span id="cb3-4">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">scale_size</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">range =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">name=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Wins"</span>) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">coord_flip</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb3-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_text</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">12500</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">121</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">label=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Average"</span>)<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb3-6">   <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"rect"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"blue"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>, </span>
-<span id="cb3-7">        <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xmin =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9902.70</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xmax =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">Inf</span>,</span>
-<span id="cb3-8">        <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ymin =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">80.38565</span> , <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ymax =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">Inf</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb3-9">  <span class="fu" style="color: #4758AB;
+<span id="cb3-5"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span></span>
-<span id="cb3-10">  <span class="fu" style="color: #4758AB;
+<span id="cb3-6">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">labs</span>(</span>
+<span id="cb3-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Super Bowl Wins"</span>, </span>
+<span id="cb3-8">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Team"</span>, </span>
+<span id="cb3-9">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Super Bowl Wins, but Where are the Vikings?"</span>, </span>
+<span id="cb3-10">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">subtitle=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Super Bowls wins in the NFL for all time. Highlighted in green is the Green Bay Packers, up one in the border battle."</span>, </span>
 <span id="cb3-11">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">x=</span><span class="st" style="color: #20794D;
+font-style: inherit;">caption=</span><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Attendance"</span>, </span>
-<span id="cb3-12">    <span class="at" style="color: #657422;
+font-style: inherit;">"Source: Pro Football Reference| By Lily Hemmmersbach"</span></span>
+<span id="cb3-12">    ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">y=</span><span class="st" style="color: #20794D;
+font-style: inherit;">+</span></span>
+<span id="cb3-13">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">"Home Team Score"</span>, </span>
-<span id="cb3-13">    <span class="at" style="color: #657422;
+font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">title=</span><span class="st" style="color: #20794D;
+font-style: inherit;">+</span></span>
+<span id="cb3-14">  <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">"Higher Attendance, Higher Performance in BIG Ten?"</span>, </span>
-<span id="cb3-14">    <span class="at" style="color: #657422;
+font-style: inherit;">theme</span>(</span>
+<span id="cb3-15">     <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">subtitle=</span><span class="st" style="color: #20794D;
+font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">"Analysis of attendance levels relate to home scoring and wins across BIG Ten mens basketball during 2020-2025 seasons.</span></span>
-<span id="cb3-15"><span class="st" style="color: #20794D;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">Red = Win, Grey = Loss. "</span>, </span>
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">18</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">face =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bold"</span>),</span>
 <span id="cb3-16">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">caption=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Source: Saiem Gilani. hoopR: Retrieved from https://hoopr.sportsdataverse.org | By Lily Hemmmersbach"</span></span>
-<span id="cb3-17">    ) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb3-18">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb3-19">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme</span>(</span>
-<span id="cb3-20">     <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">18</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">face =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"bold"</span>),</span>
-<span id="cb3-21">    <span class="at" style="color: #657422;
-background-color: null;
 font-style: inherit;">axis.title =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
@@ -775,7 +518,7 @@ background-color: null;
 font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>), </span>
-<span id="cb3-22">    <span class="at" style="color: #657422;
+<span id="cb3-17">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">plot.subtitle =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -784,304 +527,82 @@ background-color: null;
 font-style: inherit;">size=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">9</span>), </span>
-<span id="cb3-23">    <span class="at" style="color: #657422;
+<span id="cb3-18">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">panel.grid.minor =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">element_blank</span>(),</span>
-<span id="cb3-24">    <span class="at" style="color: #657422;
+<span id="cb3-19">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">plot.title.position =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"plot"</span></span>
-<span id="cb3-25">  )</span></code></pre></div></div>
+<span id="cb3-20">  )</span></code></pre></div></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="https://your-website-url.example.com/posts/attendance-correlation-to-win-percentage/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="https://your-website-url.example.com/posts/wi-mn-rival/index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>It seems clear—fans matter. The bigger the crowd, the louder the support, the stronger the performance. For BIG Ten teams, bringing in fans might just be the secret weapon for racking up home wins.</p>
+<p>Green Bay Packers: 4. Minnesota: Still trying.</p>
+<p>Don’t get me wrong, the Vikings have made it to the Super bowl four times, but have choked every single time. Close calls? A few. Championships? None.</p>
+<p>Even after this first two graphs show the real winner of the battle with the lack of Minnesota even pulling off one Super Bowl win, you’re still not convinced? With this last graph, it is the win percentage in the MLB. Take a look at who comes out on top more.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data=</span>bigtengame, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x=</span>attendance, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y=</span>home_score, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> home_score), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"light grey"</span>,</span>
-<span id="cb4-2"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">alpha =</span> .<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb4-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data=</span>bigtenwingame, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x=</span>attendance, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y=</span>home_score, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> home_score), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"red"</span>,</span>
-<span id="cb4-4"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">alpha =</span> .<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb4-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_text</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">12500</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">121</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">label=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Average"</span>)<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb4-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_size</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">range =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">name=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Wins"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb4-7">   <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">annotate</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"rect"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"blue"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.1</span>, </span>
-<span id="cb4-8">        <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xmin =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9902.70</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">xmax =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">Inf</span>,</span>
-<span id="cb4-9">        <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ymin =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">80.38565</span> , <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ymax =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">Inf</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb4-10"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb4-11">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">labs</span>(</span>
-<span id="cb4-12">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Attendance"</span>, </span>
-<span id="cb4-13">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Home Team Score"</span>, </span>
-<span id="cb4-14">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">title=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Do bigger crowds mean more wins in the BIG Ten?"</span>, </span>
-<span id="cb4-15">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">subtitle=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Analysis of attendance levels, home scoring and wins across the BIG Ten Conference during 2020-2025 seasons.</span></span>
-<span id="cb4-16"><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">Red = Win, Grey = Loss."</span>, </span>
-<span id="cb4-17">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">caption=</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Source: Saiem Gilani. hoopR: Retrieved from https://hoopr.sportsdataverse.org | By Lily Hemmmersbach"</span></span>
-<span id="cb4-18">    ) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb4-19">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme</span>(</span>
-<span id="cb4-20">     <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">18</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">face =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"bold"</span>),</span>
-<span id="cb4-21">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">axis.title =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">8</span>), </span>
-<span id="cb4-22">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">plot.subtitle =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size=</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">9</span>), </span>
-<span id="cb4-23">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">panel.grid.minor =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">element_blank</span>(),</span>
-<span id="cb4-24">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">plot.title.position =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"plot"</span></span>
-<span id="cb4-25">  )</span></code></pre></div></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://your-website-url.example.com/posts/attendance-correlation-to-win-percentage/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>This table ranks teams by their average home score and highlights performance tiers with color. Dark blue for the top 5 teams and grey for the rest.</p>
-<p>The top teams like Iowa and USC, stand out immediately, not just in score but in how consistently they win when playing at home. The middle tier teams are competitive, but often fall just short of the elite. Meanwhile, the bottom teams struggle to consistently hit high scores, showing how hard it is to dominate in the Big Ten.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">homewins<span class="sc" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">mlb<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
-<span id="cb5-2">  <span class="fu" style="color: #4758AB;
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">arrange</span>(<span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">desc</span>(home_score)) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">desc</span>(avg_winper)) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb5-3">  <span class="fu" style="color: #4758AB;
+<span id="cb4-3">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">gt</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb5-4">  <span class="fu" style="color: #4758AB;
+<span id="cb4-4">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cols_label</span>(</span>
-<span id="cb5-5">    <span class="at" style="color: #657422;
+<span id="cb4-5">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">home_display_name =</span> <span class="st" style="color: #20794D;
+font-style: inherit;">Team =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Team Name"</span>,</span>
-<span id="cb5-6">    <span class="at" style="color: #657422;
+<span id="cb4-6">    <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">home_score =</span> <span class="st" style="color: #20794D;
+font-style: inherit;">avg_winper =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Average Score"</span>, </span>
-<span id="cb5-7">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">avgwinnergone =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Average Attendance"</span></span>
-<span id="cb5-8">  ) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">"Average Win Percent"</span>, </span>
+<span id="cb4-7">    ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb5-9">  <span class="fu" style="color: #4758AB;
+<span id="cb4-8">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tab_header</span>(</span>
-<span id="cb5-10">    <span class="at" style="color: #657422;
+<span id="cb4-9">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"How does the BIG Ten attendance relate to wins?"</span>,</span>
-<span id="cb5-11">    <span class="at" style="color: #657422;
+font-style: inherit;">"WI in Top Five, Again Where is MN?"</span>,</span>
+<span id="cb4-10">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">subtitle =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"The average wins in mens basketball across the 2020-2025 season in the BIG Ten."</span></span>
-<span id="cb5-12">  ) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">"The average win percent in the MLB over the last five years. Wisconsin over Minnesota by a lot."</span></span>
+<span id="cb4-11">  ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tab_style</span>(</span>
-<span id="cb5-13">    <span class="at" style="color: #657422;
+<span id="cb4-12">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">style =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1098,19 +619,19 @@ background-color: null;
 font-style: inherit;">align =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"left"</span>),</span>
-<span id="cb5-14">    <span class="at" style="color: #657422;
+<span id="cb4-13">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">locations =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cells_title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"title"</span>)</span>
-<span id="cb5-15">  ) <span class="sc" style="color: #5E5E5E;
+<span id="cb4-14">  ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tab_style</span>(</span>
-<span id="cb5-16">    <span class="at" style="color: #657422;
+<span id="cb4-15">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">style =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1123,33 +644,33 @@ background-color: null;
 font-style: inherit;">align =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"left"</span>),</span>
-<span id="cb5-17">    <span class="at" style="color: #657422;
+<span id="cb4-16">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">locations =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cells_title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"subtitle"</span>)</span>
-<span id="cb5-18">  ) <span class="sc" style="color: #5E5E5E;
+<span id="cb4-17">  ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb5-19">  <span class="fu" style="color: #4758AB;
+<span id="cb4-18">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tab_source_note</span>(</span>
-<span id="cb5-20">    <span class="at" style="color: #657422;
+<span id="cb4-19">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">source_note =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">md</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"**By:** Lily Hemmersbach  |  **Source:** Saiem Gilani. hoopR: Retrieved from https://hoopr.sportsdataverse.org"</span>)</span>
-<span id="cb5-21">  ) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">"**By:** Lily Hemmersbach  |  **Source:** Team Rankings MLB"</span>)</span>
+<span id="cb4-20">  ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb5-22">  <span class="fu" style="color: #4758AB;
+<span id="cb4-21">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tab_style</span>(</span>
-<span id="cb5-23">     <span class="at" style="color: #657422;
+<span id="cb4-22">     <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">locations =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1158,12 +679,12 @@ background-color: null;
 font-style: inherit;">columns =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">everything</span>()),</span>
-<span id="cb5-24">     <span class="at" style="color: #657422;
+<span id="cb4-23">     <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">style =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">list</span>(</span>
-<span id="cb5-25">       <span class="fu" style="color: #4758AB;
+<span id="cb4-24">       <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cell_borders</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1176,7 +697,7 @@ background-color: null;
 font-style: inherit;">px</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>)),</span>
-<span id="cb5-26">       <span class="fu" style="color: #4758AB;
+<span id="cb4-25">       <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cell_text</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1189,82 +710,113 @@ background-color: null;
 font-style: inherit;">12</span>))) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb5-27">   <span class="fu" style="color: #4758AB;
+<span id="cb4-26">   <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">opt_row_striping</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span> </span>
-<span id="cb5-28">  <span class="fu" style="color: #4758AB;
+<span id="cb4-27">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">opt_table_lines</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"none"</span>) <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">|&gt;</span></span>
-<span id="cb5-29">  <span class="fu" style="color: #4758AB;
+<span id="cb4-28">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">tab_style</span>(</span>
-<span id="cb5-30">    <span class="at" style="color: #657422;
+<span id="cb4-29">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">style =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">list</span>(</span>
-<span id="cb5-31">      <span class="fu" style="color: #4758AB;
+<span id="cb4-30">      <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cell_fill</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"blue"</span>),</span>
-<span id="cb5-32">      <span class="fu" style="color: #4758AB;
+font-style: inherit;">"navy"</span>),</span>
+<span id="cb4-31">      <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cell_text</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"white"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">weight =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"bold"</span>)</span>
-<span id="cb5-33">    ),</span>
-<span id="cb5-34">    <span class="at" style="color: #657422;
+font-style: inherit;">"white"</span>)</span>
+<span id="cb4-32">    ),</span>
+<span id="cb4-33">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">locations =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">cells_body</span>(</span>
-<span id="cb5-35">      <span class="at" style="color: #657422;
+<span id="cb4-34">      <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">rows =</span> <span class="fu" style="color: #4758AB;
+font-style: inherit;">rows =</span> Team <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">rank</span>(<span class="sc" style="color: #5E5E5E;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">-</span>home_score) <span class="sc" style="color: #5E5E5E;
+font-style: inherit;">"Milwaukee"</span></span>
+<span id="cb4-35">    )</span>
+<span id="cb4-36">  ) <span class="sc" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&lt;=</span> <span class="dv" style="color: #AD0000;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-37">   <span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">5</span></span>
-<span id="cb5-36">    )</span>
-<span id="cb5-37">  ) </span></code></pre></div></div>
+font-style: inherit;">tab_style</span>(</span>
+<span id="cb4-38">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">style =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb4-39">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cell_fill</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red"</span>),</span>
+<span id="cb4-40">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cell_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>)</span>
+<span id="cb4-41">    ),</span>
+<span id="cb4-42">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">locations =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cells_body</span>(</span>
+<span id="cb4-43">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rows =</span> Team <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Minnesota"</span></span>
+<span id="cb4-44">    )</span>
+<span id="cb4-45">  )</span></code></pre></div></div>
 </details>
 <div class="cell-output-display">
-<div id="aensiftjoq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aensiftjoq table {
+<div id="wykjzxwimd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wykjzxwimd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aensiftjoq thead, #aensiftjoq tbody, #aensiftjoq tfoot, #aensiftjoq tr, #aensiftjoq td, #aensiftjoq th {
+#wykjzxwimd thead, #wykjzxwimd tbody, #wykjzxwimd tfoot, #wykjzxwimd tr, #wykjzxwimd td, #wykjzxwimd th {
   border-style: none;
 }
 
-#aensiftjoq p {
+#wykjzxwimd p {
   margin: 0;
   padding: 0;
 }
 
-#aensiftjoq .gt_table {
+#wykjzxwimd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1290,12 +842,12 @@ font-style: inherit;">5</span></span>
   border-left-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_caption {
+#wykjzxwimd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aensiftjoq .gt_title {
+#wykjzxwimd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1307,7 +859,7 @@ font-style: inherit;">5</span></span>
   border-bottom-width: 0;
 }
 
-#aensiftjoq .gt_subtitle {
+#wykjzxwimd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1319,7 +871,7 @@ font-style: inherit;">5</span></span>
   border-top-width: 0;
 }
 
-#aensiftjoq .gt_heading {
+#wykjzxwimd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1331,13 +883,13 @@ font-style: inherit;">5</span></span>
   border-right-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_bottom_border {
+#wykjzxwimd .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_col_headings {
+#wykjzxwimd .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1352,7 +904,7 @@ font-style: inherit;">5</span></span>
   border-right-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_col_heading {
+#wykjzxwimd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1372,7 +924,7 @@ font-style: inherit;">5</span></span>
   overflow-x: hidden;
 }
 
-#aensiftjoq .gt_column_spanner_outer {
+#wykjzxwimd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1384,15 +936,15 @@ font-style: inherit;">5</span></span>
   padding-right: 4px;
 }
 
-#aensiftjoq .gt_column_spanner_outer:first-child {
+#wykjzxwimd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aensiftjoq .gt_column_spanner_outer:last-child {
+#wykjzxwimd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aensiftjoq .gt_column_spanner {
+#wykjzxwimd .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1404,11 +956,11 @@ font-style: inherit;">5</span></span>
   width: 100%;
 }
 
-#aensiftjoq .gt_spanner_row {
+#wykjzxwimd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aensiftjoq .gt_group_heading {
+#wykjzxwimd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1434,7 +986,7 @@ font-style: inherit;">5</span></span>
   text-align: left;
 }
 
-#aensiftjoq .gt_empty_group_heading {
+#wykjzxwimd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1449,15 +1001,15 @@ font-style: inherit;">5</span></span>
   vertical-align: middle;
 }
 
-#aensiftjoq .gt_from_md > :first-child {
+#wykjzxwimd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aensiftjoq .gt_from_md > :last-child {
+#wykjzxwimd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aensiftjoq .gt_row {
+#wykjzxwimd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1476,7 +1028,7 @@ font-style: inherit;">5</span></span>
   overflow-x: hidden;
 }
 
-#aensiftjoq .gt_stub {
+#wykjzxwimd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1489,7 +1041,7 @@ font-style: inherit;">5</span></span>
   padding-right: 5px;
 }
 
-#aensiftjoq .gt_stub_row_group {
+#wykjzxwimd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1503,15 +1055,15 @@ font-style: inherit;">5</span></span>
   vertical-align: top;
 }
 
-#aensiftjoq .gt_row_group_first td {
+#wykjzxwimd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aensiftjoq .gt_row_group_first th {
+#wykjzxwimd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aensiftjoq .gt_summary_row {
+#wykjzxwimd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1521,16 +1073,16 @@ font-style: inherit;">5</span></span>
   padding-right: 5px;
 }
 
-#aensiftjoq .gt_first_summary_row {
+#wykjzxwimd .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_first_summary_row.thick {
+#wykjzxwimd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aensiftjoq .gt_last_summary_row {
+#wykjzxwimd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1540,7 +1092,7 @@ font-style: inherit;">5</span></span>
   border-bottom-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_grand_summary_row {
+#wykjzxwimd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1550,7 +1102,7 @@ font-style: inherit;">5</span></span>
   padding-right: 5px;
 }
 
-#aensiftjoq .gt_first_grand_summary_row {
+#wykjzxwimd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1560,7 +1112,7 @@ font-style: inherit;">5</span></span>
   border-top-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_last_grand_summary_row_top {
+#wykjzxwimd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1570,11 +1122,11 @@ font-style: inherit;">5</span></span>
   border-bottom-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_striped {
+#wykjzxwimd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aensiftjoq .gt_table_body {
+#wykjzxwimd .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1583,7 +1135,7 @@ font-style: inherit;">5</span></span>
   border-bottom-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_footnotes {
+#wykjzxwimd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1597,7 +1149,7 @@ font-style: inherit;">5</span></span>
   border-right-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_footnote {
+#wykjzxwimd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1606,7 +1158,7 @@ font-style: inherit;">5</span></span>
   padding-right: 5px;
 }
 
-#aensiftjoq .gt_sourcenotes {
+#wykjzxwimd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1620,7 +1172,7 @@ font-style: inherit;">5</span></span>
   border-right-color: #D3D3D3;
 }
 
-#aensiftjoq .gt_sourcenote {
+#wykjzxwimd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1628,72 +1180,72 @@ font-style: inherit;">5</span></span>
   padding-right: 5px;
 }
 
-#aensiftjoq .gt_left {
+#wykjzxwimd .gt_left {
   text-align: left;
 }
 
-#aensiftjoq .gt_center {
+#wykjzxwimd .gt_center {
   text-align: center;
 }
 
-#aensiftjoq .gt_right {
+#wykjzxwimd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aensiftjoq .gt_font_normal {
+#wykjzxwimd .gt_font_normal {
   font-weight: normal;
 }
 
-#aensiftjoq .gt_font_bold {
+#wykjzxwimd .gt_font_bold {
   font-weight: bold;
 }
 
-#aensiftjoq .gt_font_italic {
+#wykjzxwimd .gt_font_italic {
   font-style: italic;
 }
 
-#aensiftjoq .gt_super {
+#wykjzxwimd .gt_super {
   font-size: 65%;
 }
 
-#aensiftjoq .gt_footnote_marks {
+#wykjzxwimd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aensiftjoq .gt_asterisk {
+#wykjzxwimd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aensiftjoq .gt_indent_1 {
+#wykjzxwimd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aensiftjoq .gt_indent_2 {
+#wykjzxwimd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aensiftjoq .gt_indent_3 {
+#wykjzxwimd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aensiftjoq .gt_indent_4 {
+#wykjzxwimd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aensiftjoq .gt_indent_5 {
+#wykjzxwimd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aensiftjoq .katex-display {
+#wykjzxwimd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aensiftjoq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wykjzxwimd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1701,111 +1253,140 @@ font-style: inherit;">5</span></span>
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading header">
-<td colspan="3" class="gt_heading gt_title gt_font_normal" style="text-align: left; color: #000000; font-weight: bold;">How does the BIG Ten attendance relate to wins?</td>
+<td colspan="2" class="gt_heading gt_title gt_font_normal" style="text-align: left; color: #000000; font-weight: bold;">WI in Top Five, Again Where is MN?</td>
 </tr>
 <tr class="gt_heading even">
-<td colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="text-align: left; color: #000000;">The average wins in mens basketball across the 2020-2025 season in the BIG Ten.</td>
+<td colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="text-align: left; color: #000000;">The average win percent in the MLB over the last five years. Wisconsin over Minnesota by a lot.</td>
 </tr>
 <tr class="gt_col_headings header">
-<th id="home_display_name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold" scope="col">Team Name</th>
-<th id="home_score" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold" scope="col">Average Score</th>
-<th id="avgwinnergone" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold" scope="col">Average Attendance</th>
+<th id="Team" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold" scope="col">Team Name</th>
+<th id="avg_winper" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: #000000; font-size: 12; font-weight: bold" scope="col">Average Win Percent</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="home_display_name" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">Iowa Hawkeyes</td>
-<td class="gt_row gt_right" headers="home_score" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">89.61842</td>
-<td class="gt_row gt_right" headers="avgwinnergone" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">10439.618</td>
+<td class="gt_row gt_left" headers="Team">LA Dodgers</td>
+<td class="gt_row gt_right" headers="avg_winper">0.6258</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="home_display_name" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">USC Trojans</td>
-<td class="gt_row gt_right gt_striped" headers="home_score" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">85.50000</td>
-<td class="gt_row gt_right gt_striped" headers="avgwinnergone" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">4194.667</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Houston</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.5770</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="home_display_name" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">Illinois Fighting Illini</td>
-<td class="gt_row gt_right" headers="home_score" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">82.93902</td>
-<td class="gt_row gt_right" headers="avgwinnergone" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">13838.159</td>
+<td class="gt_row gt_left" headers="Team" style="background-color: #000080; color: #FFFFFF">Milwaukee</td>
+<td class="gt_row gt_right" headers="avg_winper" style="background-color: #000080; color: #FFFFFF">0.5650</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="home_display_name" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">Michigan Wolverines</td>
-<td class="gt_row gt_right gt_striped" headers="home_score" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">81.90476</td>
-<td class="gt_row gt_right gt_striped" headers="avgwinnergone" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">10628.111</td>
+<td class="gt_row gt_left gt_striped" headers="Team">NY Yankees</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.5642</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="home_display_name" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">Purdue Boilermakers</td>
-<td class="gt_row gt_right" headers="home_score" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">81.85417</td>
-<td class="gt_row gt_right" headers="avgwinnergone" style="background-color: #0000FF; color: #FFFFFF; font-weight: bold">12949.427</td>
+<td class="gt_row gt_left" headers="Team">Atlanta</td>
+<td class="gt_row gt_right" headers="avg_winper">0.5638</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="home_display_name">Ohio State Buckeyes</td>
-<td class="gt_row gt_right gt_striped" headers="home_score">81.06944</td>
-<td class="gt_row gt_right gt_striped" headers="avgwinnergone">11610.472</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Philadelphia</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.5552</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="home_display_name">Penn State Nittany Lions</td>
-<td class="gt_row gt_right" headers="home_score">80.70769</td>
-<td class="gt_row gt_right" headers="avgwinnergone">7708.985</td>
+<td class="gt_row gt_left" headers="Team">Seattle</td>
+<td class="gt_row gt_right" headers="avg_winper">0.5454</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="home_display_name">Oregon Ducks</td>
-<td class="gt_row gt_right gt_striped" headers="home_score">80.43750</td>
-<td class="gt_row gt_right gt_striped" headers="avgwinnergone">6365.000</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Tampa Bay</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.5410</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="home_display_name">Washington Huskies</td>
-<td class="gt_row gt_right" headers="home_score">80.11111</td>
-<td class="gt_row gt_right" headers="avgwinnergone">5149.667</td>
+<td class="gt_row gt_left" headers="Team">Toronto</td>
+<td class="gt_row gt_right" headers="avg_winper">0.5402</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="home_display_name">UCLA Bruins</td>
-<td class="gt_row gt_right gt_striped" headers="home_score">79.56250</td>
-<td class="gt_row gt_right gt_striped" headers="avgwinnergone">6946.188</td>
+<td class="gt_row gt_left gt_striped" headers="Team">San Diego</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.5332</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="home_display_name">Nebraska Cornhuskers</td>
-<td class="gt_row gt_right" headers="home_score">79.39286</td>
-<td class="gt_row gt_right" headers="avgwinnergone">13239.982</td>
+<td class="gt_row gt_left" headers="Team">SF Giants</td>
+<td class="gt_row gt_right" headers="avg_winper">0.5270</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="home_display_name">Michigan State Spartans</td>
-<td class="gt_row gt_right gt_striped" headers="home_score">78.81481</td>
-<td class="gt_row gt_right gt_striped" headers="avgwinnergone">12756.049</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Cleveland</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.5262</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="home_display_name">Maryland Terrapins</td>
-<td class="gt_row gt_right" headers="home_score">78.71605</td>
-<td class="gt_row gt_right" headers="avgwinnergone">12201.864</td>
+<td class="gt_row gt_left" headers="Team">NY Mets</td>
+<td class="gt_row gt_right" headers="avg_winper">0.5234</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="home_display_name">Indiana Hoosiers</td>
-<td class="gt_row gt_right gt_striped" headers="home_score">78.29870</td>
-<td class="gt_row gt_right gt_striped" headers="avgwinnergone">15512.143</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Boston</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.5154</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="home_display_name">Wisconsin Badgers</td>
-<td class="gt_row gt_right" headers="home_score">76.51351</td>
-<td class="gt_row gt_right" headers="avgwinnergone">14194.595</td>
+<td class="gt_row gt_left" headers="Team">St. Louis</td>
+<td class="gt_row gt_right" headers="avg_winper">0.5102</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="home_display_name">Minnesota Golden Gophers</td>
-<td class="gt_row gt_right gt_striped" headers="home_score">76.25926</td>
-<td class="gt_row gt_right gt_striped" headers="avgwinnergone">8270.741</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Chi Cubs</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.4968</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="home_display_name">Northwestern Wildcats</td>
-<td class="gt_row gt_right" headers="home_score">75.93443</td>
-<td class="gt_row gt_right" headers="avgwinnergone">4639.049</td>
+<td class="gt_row gt_left" headers="Team">Baltimore</td>
+<td class="gt_row gt_right" headers="avg_winper">0.4926</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left gt_striped" headers="home_display_name">Rutgers Scarlet Knights</td>
-<td class="gt_row gt_right gt_striped" headers="home_score">74.68116</td>
-<td class="gt_row gt_right gt_striped" headers="avgwinnergone">7603.899</td>
+<td class="gt_row gt_left gt_striped" headers="Team">Detroit</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.4864</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Team" style="background-color: #FF0000; color: #FFFFFF">Minnesota</td>
+<td class="gt_row gt_right" headers="avg_winper" style="background-color: #FF0000; color: #FFFFFF">0.4814</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Team">Cincinnati</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.4764</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Team">Texas</td>
+<td class="gt_row gt_right" headers="avg_winper">0.4694</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Team">Arizona</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.4692</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Team">Kansas City</td>
+<td class="gt_row gt_right" headers="avg_winper">0.4480</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Team">Miami</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.4446</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Team">LA Angels</td>
+<td class="gt_row gt_right" headers="avg_winper">0.4420</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Team">Pittsburgh</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.4272</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Team">Sacramento</td>
+<td class="gt_row gt_right" headers="avg_winper">0.4210</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Team">Chi Sox</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.4132</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Team">Washington</td>
+<td class="gt_row gt_right" headers="avg_winper">0.4048</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left gt_striped" headers="Team">Colorado</td>
+<td class="gt_row gt_right gt_striped" headers="avg_winper">0.3772</td>
 </tr>
 </tbody><tfoot>
 <tr class="gt_sourcenotes odd">
-<td colspan="3" class="gt_sourcenote"><strong>By:</strong> Lily Hemmersbach | <strong>Source:</strong> Saiem Gilani. hoopR: Retrieved from https://hoopr.sportsdataverse.org</td>
+<td colspan="2" class="gt_sourcenote"><strong>By:</strong> Lily Hemmersbach | <strong>Source:</strong> Team Rankings MLB</td>
 </tr>
 </tfoot>
 
@@ -1814,17 +1395,14 @@ font-style: inherit;">5</span></span>
 </div>
 </div>
 </div>
-<p>Across all the graphs, one thing is clear, bigger crowds often mean higher scores and more wins. When the stands are full, home teams seem to feed off the energy, performing at their best. For coaches, players, and fans, this shows that fan support isn’t just for hype it’s a real competitive advantage. In the BIG Ten, the crowd can be the difference between a close game and a decisive home victory.</p>
+<p>Across all the graphs, one thing is clear, Wisconsin is the real winner of this border battle and will more then likely remain on top when it comes to sports, as well as beer and cheese. Momentum matters in rivalries, and Wisconsin has it. Right now the border battle isn’t just a rivalry, it’s a reminder on how Wisconsin is setting the standards between the two states.</p>
 
 
 
  ]]></description>
-  <category>basketball</category>
-  <category>college</category>
-  <category>attendance</category>
-  <guid>https://your-website-url.example.com/posts/attendance-correlation-to-win-percentage/</guid>
+  <guid>https://your-website-url.example.com/posts/wi-mn-rival/</guid>
   <pubDate>Mon, 17 Nov 2025 06:00:00 GMT</pubDate>
-  <media:content url="https://your-website-url.example.com/posts/attendance-correlation-to-win-percentage/image.png" medium="image" type="image/png"/>
+  <media:content url="https://your-website-url.example.com/posts/wi-mn-rival/image.png" medium="image" type="image/png"/>
 </item>
 </channel>
 </rss>

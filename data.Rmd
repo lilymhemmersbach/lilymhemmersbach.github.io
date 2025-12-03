@@ -2,6 +2,8 @@
 library(tidyverse)
 library(hoopR)
 library(ggrepel)
+library(gt)
+
 ```
 
 ```{r}
@@ -54,13 +56,14 @@ bigtenwinsix <- gamessix |>
 filter(home_conference_id == "7") |>
   filter(home_winner==TRUE)
 
-bigtengame <- bind_rows(bigtenone, bigtentwo, bigtenthree, bigtenfour, bigtensix)
+bigtengame <- bind_rows(bigtenone, bigtentwo, bigtenthree, bigtenfour, bigtensix) |> filter(attendance >0)
 
-bigtenwingame <- bind_rows(bigtenwinone, bigtenwintwo, bigtenwinthree, bigtenwinfour, bigtenwinsix)
+bigtenwingame <- bind_rows(bigtenwinone, bigtenwintwo, bigtenwinthree, bigtenwinfour, bigtenwinsix)  |> filter(attendance >0)
 ```
 
 ```{r}
 avgwinner <- winnergames |>
+  filter(attendance >0) |>
   group_by(home_display_name) |>
   filter(home_conference_id == "7") |>
   summarize(avgwinnergone=mean(attendance, na.rm = TRUE))
@@ -68,6 +71,7 @@ avgwinner <- winnergames |>
 
 ```{r}
 homewins <- bigtengame |>
+  filter(attendance >0) |>
   filter(home_winner==TRUE) |>
   group_by(home_display_name) |>
   summarize(home_score = mean(home_score, na.rm = TRUE), avgwinnergone=mean(attendance, na.rm = TRUE))
@@ -133,7 +137,7 @@ ggplot() +
   theme(
      plot.title = element_text(size = 18, face = "bold"),
     axis.title = element_text(size = 8), 
-    plot.subtitle = element_text(size=10), 
+    plot.subtitle = element_text(size=8), 
     panel.grid.minor = element_blank(),
     plot.title.position = "plot"
   )
@@ -143,10 +147,10 @@ ggplot() +
 ggplot() + 
   geom_point(data=bigtengame, aes(x=attendance, y=home_score)) +
   geom_point(data=bigtenwingame, aes(x=attendance, y=home_score), color = "red") +
-  scale_size(range = c(2, 5), name="Wins") +
+  scale_size(range = c(2, 5), name="Average") +
    annotate("rect", fill = "blue", alpha = 0.1, 
         xmin = 9902.70, xmax = Inf,
-        ymin = 80.12863, ymax = Inf) +
+        ymin = 80.38565	, ymax = Inf) +
   theme_minimal() +
   labs(
     x="Attendance", 
@@ -168,14 +172,16 @@ ggplot() +
 
 
 ```{r}
-ggplot() + geom_point(data=bigtengame, aes(x=attendance, y=home_score, size = home_score), color="light grey",
+ggplot() + 
+  geom_point(data=bigtengame, aes(x=attendance, y=home_score, size = home_score), color="light grey",
 alpha = .3) + 
   geom_point(data=bigtenwingame, aes(x=attendance, y=home_score, size = home_score), color="red",
 alpha = .3) + 
-  scale_size(range = c(2, 5), name="Wins") +
+  geom_text(aes(x=12500, y=121), label="Average") +
+  scale_size(range = c(.2, 5), name="Wins") +
    annotate("rect", fill = "blue", alpha = 0.1, 
         xmin = 9902.70, xmax = Inf,
-        ymin = 80.12863, ymax = Inf) +
+        ymin = 80.38565	, ymax = Inf) +
 theme_minimal() +
   labs(
     x="Attendance", 
@@ -193,16 +199,66 @@ theme_minimal() +
   )
 ```
 
-```{r}
-homewins|>
-  group_by(home_display_name) |>
-  summarize(
-    Wins = sum(home_score, na.rm = TRUE),
-    Avg_Attendance = mean(avgwinnergone, na.rm = TRUE)
+{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE}
+
+homewins|> 
+  arrange(desc(home_score)) |>
+  gt() |>
+  cols_label(
+    home_display_name = "Team Name",
+    home_score = "Average Score", 
+    avgwinnergone = "Average Attendance"
   ) |>
-  arrange(desc(Wins), desc(Avg_Attendance)) |>
-  top_n(10, wt= Wins) 
+  tab_header(
+    title = "How does the BIG Ten attendance relate to wins?",
+    subtitle = "The average wins in mens basketball across the 2020-2025 season in the BIG Ten."
+  ) |> tab_style(
+    style = cell_text(color = "black", weight = "bold", align = "left"),
+    locations = cells_title("title")
+  ) |> tab_style(
+    style = cell_text(color = "black", align = "left"),
+    locations = cells_title("subtitle")
+  ) |>
+  tab_source_note(
+    source_note = md("**By:** Lily Hemmersbach  |  **Source:** Saiem Gilani. hoopR: Retrieved from https://hoopr.sportsdataverse.org")
+  ) |>
+  tab_style(
+     locations = cells_column_labels(columns = everything()),
+     style = list(
+       cell_borders(sides = "bottom", weight = px(3)),
+       cell_text(weight = "bold", size=12))) |>
+   opt_row_striping() |> 
+  opt_table_lines("none") |>
+  tab_style(
+    style = list(
+      cell_fill(color = "blue"),
+      cell_text(color = "white", weight = "bold")
+    ),
+    locations = cells_body(
+      rows = rank(-home_score) <= 5
+    )
+  ) |>
+  tab_style(
+    style = list(
+      cell_fill(color = "#BDD7E7"),
+      cell_text(color = "black")
+    ),
+    locations = cells_body(
+      rows = rank(-home_score) > 5 & rank(-home_score) <= 12
+    )
+  ) |> 
+  tab_style(
+    style = list(
+      cell_fill(color = "#F0F0F0"),
+      cell_text(color = "black")
+    ),
+    locations = cells_body(
+      rows = rank(-home_score) > 12
+    )
+  )
 ```
+
 
 
 
